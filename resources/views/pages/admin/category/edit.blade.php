@@ -1,22 +1,21 @@
 @extends('layouts.admin')
 
 @section('title')
-    Category
+    Edit Category
 @endsection
 
 @section('content')
 <div class="section-content section-dashboard-home" data-aos="fade-up">
   <div class="container-fluid">
-    <div class="dashboard-heading">
-      <h2 class="dashboard-title">Category</h2>
+    <div class="dashboard-heading text-center mb-4">
+      <h2 class="dashboard-title">Edit Category</h2>
       <p class="dashboard-subtitle">
-        This is RYNStore Edit Category Panel
+        Update your category details
       </p>
     </div>
     <div class="dashboard-content">
-      <div class="row">
-        <div class="col-md-12">
-            {{-- Membuat validasi error dengan menggunakan blade template laravel --}}
+      <div class="row justify-content-center">
+        <div class="col-md-8">
             @if($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -26,45 +25,41 @@
                     </ul>
                 </div>
             @endif
-            <div class="card">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white d-flex align-items-center justify-content-between">
+                    <h4 class="mb-0">Edit Category Form</h4>
+                    <a href="{{ route('category.index') }}" class="btn btn-light btn-sm">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </a>
+                </div>
                 <div class="card-body">
                     <form action="{{ route('category.update', $item->id) }}" method="POST" enctype="multipart/form-data">
                         @method('PUT')
-                        {{-- PUT adalah method edit data dan mengirim semua data --}}
                         @csrf
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                <label>Name Kategori</label>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    name="name"
-                                    value="{{ $item->name }}"
-                                    required
-                                />
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                <label>Foto</label>
-                                <input
-                                    type="file"
-                                    class="form-control"
-                                    name="photo"
-                                />
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <label for="name">Category Name</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="name"
+                                name="name"
+                                value="{{ $item->name }}"
+                                required
+                            />
                         </div>
-                        
-                        <div class="row"></div>
-                            <div class="col text-right">
-                                <button
-                                    type="submit"
-                                    class="btn btn-success px-5">
-                                    Save Now
-                                </button>
-                            </div>
+                        <div class="form-group">
+                            <label for="photo">Photo</label>
+                            <input
+                                type="file"
+                                class="form-control-file"
+                                id="photo"
+                                name="photo"
+                            />
+                        </div>
+                        <div class="form-group text-right">
+                            <button type="submit" class="btn btn-success px-5">
+                                Save Now
+                            </button>
                         </div>
                     </form>
                 </div>

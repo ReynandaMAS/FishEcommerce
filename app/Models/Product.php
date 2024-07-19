@@ -8,25 +8,24 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
 
     protected $fillable = [
-        'name','user_id','category_id','price','description','slug'
+        'name','users_id','categories_id','price','description','slug'
     ];
 
     protected $hidden = [
-        'deleted_at'
     ];
 
     public function galleries(){
-        return $this->hasMany(ProductGallery::class, 'product_id', 'id');
+        return $this->hasMany(ProductGallery::class, 'products_id', 'id');
     }
 
     public function user(){
-        return $this->belongsTo(User::class, 'id', 'user_id');
+        return $this->hasOne(User::class, 'id', 'users_id');
     }
 
     public function category(){
-        return $this->belongsTo(Category::class, 'id', 'category_id');
+        return $this->belongsTo(Category::class, 'categories_id', 'id');
     }
 }
