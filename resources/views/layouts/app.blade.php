@@ -12,6 +12,8 @@
     {{-- @yield adalah untuk memanggil layout --}}
     <title>@yield('title')</title>
 
+    <link rel="icon" href="https://res.cloudinary.com/dyqjckfhh/image/upload/v1721479645/favicon_mjmerf.ico" type="image/x-icon">
+
     {{-- style --}}
     @stack('prepend-style')
     @include('includes.style')

@@ -1,16 +1,16 @@
 @extends('layouts.admin')
 
 @section('title')
-    Category
+    Product Gallery
 @endsection
 
 @section('content')
 <div class="section-content section-dashboard-home" data-aos="fade-up">
   <div class="container-fluid">
     <div class="dashboard-heading">
-      <h2 class="dashboard-title">Category</h2>
+      <h2 class="dashboard-title">Product Gallery</h2>
       <p class="dashboard-subtitle">
-        This is RYNStore Create New Category Panel
+        This is RYNStore Create New Product Gallery Panel
       </p>
     </div>
     <div class="dashboard-content">
@@ -28,23 +28,22 @@
             @endif
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('product-gallery.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                <label>Name Kategori</label>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    name="name"
-                                    required
-                                />
+                                <label>Product</label>
+                                <select name="products_id" class="form-control">
+                                    @foreach ($products as $product)
+                                        <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                    @endforeach
+                                </select>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                <label>Foto</label>
+                                <label>Foto Product</label>
                                 <input
                                     type="file"
                                     class="form-control"
@@ -54,7 +53,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="row"></div>
                             <div class="col text-right">
                                 <button

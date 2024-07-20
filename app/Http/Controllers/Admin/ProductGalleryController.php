@@ -3,16 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Http\Requests\Admin\ProductGalleryRequest;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-use App\Http\Requests\Admin\CategoryRequest;
+use App\Models\User;
+use App\Models\Category;
 
+
+use App\Http\Requests\Admin\UserRequest;
+use App\Models\ProductGallery;
 use Yajra\DataTables\Facades\DataTables;
 
-class CategoryController extends Controller
+class ProductGalleryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +27,8 @@ class CategoryController extends Controller
 
         if (request()->ajax())
         {
-            $query = Category::query();
+            //->withTrashed() untuk menampilkan soft delete data
+            $query = ProductGallery::with(['product']);
 
             return Datatables()->of($query)
                 ->addColumn('action', function($item) {
@@ -35,10 +41,7 @@ class CategoryController extends Controller
                                     Aksi
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="'. route('category.edit', $item->id) .'">
-                                        Edit
-                                    </a>
-                                    <form action="'. route('category.destroy', $item->id) .'" method="POST">
+                                    <form action="'. route('product-gallery.destroy', $item->id) .'" method="POST">
                                         '. method_field('delete') . csrf_field() .'
                                         <button type="submit" class="dropdown-item text-danger">
                                             Hapus
@@ -50,14 +53,14 @@ class CategoryController extends Controller
                     ';
                 })
                 ->editColumn('photos', function($item) {
-                    return $item->photos ? '<img src="'. Storage::url($item->photos) .'" style="max-height: 40px;" />' : '';
+                    return $item->photos ? '<img src="'. Storage::url($item->photos) .'" style="max-height: 88px;" />' : '';
                 })
                 ->rawColumns(['action', 'photos'])
                 ->make(true)
                 ;
         }
 
-        return view('pages.admin.category.index');
+        return view('pages.admin.product-gallery.index');
     }
 
     /**
@@ -65,22 +68,27 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.category.create');
+
+        $products = Product::all();
+
+        return view('pages.admin.product-gallery.create',[
+            'products' => $products
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CategoryRequest $request)
+    public function store(ProductGalleryRequest $request)
     {
         $data = $request->all();
 
-        $data['slug'] = Str::slug($request->name);
-        $data['photos'] = $request->file('photos')->store('assets/category', 'public');
+        // slug dibuat otomatis
+        $data['photos'] = $request->file('photos')->store('assets/product', 'public');
 
-        Category::create($data);
+        ProductGallery::create($data);
 
-        return redirect()->route('category.index');
+        return redirect()->route('product-gallery.index');
     }
 
     /**
@@ -96,30 +104,15 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        // findOrFail adalah mengambil data berdasarkan id dari database,
-        // jika tidak ada maka akan menampilkan error 404 page not found
-        $item = Category::findOrFail($id);
-
-        return view('pages.admin.category.edit', [
-            'item' => $item
-        ]);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoryRequest $request, string $id)
+    public function update(ProductGalleryRequest $request, string $id)
     {
-        $data = $request->all();
-
-        $data['slug'] = Str::slug($request->name);
-        $data['photos'] = $request->file('photos')->store('assets/category', 'public');
-
-        $item = Category::findOrFail($id);
-
-        $item->update($data);
-        
-        return redirect()->route('category.index');
+        //
     }
 
     /**
@@ -127,9 +120,9 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        $item = Category::findOrFail($id);
+        $item = ProductGallery::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('category.index');
+        return redirect()->route('product-gallery.index');
     }
 }

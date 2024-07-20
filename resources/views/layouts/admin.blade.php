@@ -9,6 +9,8 @@
 
     <title>@yield('title')</title>
 
+    <link rel="icon" href="https://res.cloudinary.com/dyqjckfhh/image/upload/v1721479645/favicon_mjmerf.ico" type="image/x-icon">
+
     @stack('prepend-style')
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link href="/style/main.css" rel="stylesheet" />
@@ -32,9 +34,15 @@
                     </a>
 
                     <a href="{{ route('product.index') }}"
-                        class="list-group-item list-group-item-action {{ request()->is('admin/product*') ? 'active' : '' }}"
+                        class="list-group-item list-group-item-action {{ request()->is('admin/product') ? 'active' : '' }}"
                     >
                         Products
+                    </a>
+
+                    <a href="{{ route('product-gallery.index') }}"
+                        class="list-group-item list-group-item-action {{ request()->is('admin/product-gallery*') ? 'active' : '' }}"
+                    >
+                        Galleries
                     </a>
 
                     <a href="{{ route('category.index') }}"
@@ -82,11 +90,6 @@
                                     <a class="dropdown-item" href="/">Logout</a>
                                 </div>
                             </li>
-                            {{-- <li class="nav-item">
-                  <a class="nav-link d-inline-block mt-2" href="#">
-                    <img src="/images/icon-cart-empty.svg" alt="" />
-                  </a>
-                </li> --}}
                         </ul>
                         <!-- Mobile Menu -->
                         <ul class="navbar-nav d-block d-lg-none mt-3">

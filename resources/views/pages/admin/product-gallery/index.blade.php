@@ -1,16 +1,16 @@
 @extends('layouts.admin')
 
 @section('title')
-    Category
+    Product Gallery
 @endsection
 
 @section('content')
 <div class="section-content section-dashboard-home" data-aos="fade-up">
   <div class="container-fluid">
     <div class="dashboard-heading">
-      <h2 class="dashboard-title">Category</h2>
+      <h2 class="dashboard-title">Product Gallery</h2>
       <p class="dashboard-subtitle">
-        This is RYNStore Category Panel
+        This is RYNStore Gallery Panel
       </p>
     </div>
     <div class="dashboard-content">
@@ -18,18 +18,17 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-body">
-              <a href="{{ route('category.create') }}" class="btn btn-primary mb-3">
-                + Add New Category
+              <a href="{{ route('product-gallery.create') }}" class="btn btn-primary mb-3">
+                + Add New Product
               </a>
               <div class="table-responsive">
                 <table class="table table-hover scroll-horizontal-vertical w-100 mt-3" id="crudTable">
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Name</th>
-                      <th>Slug</th>
+                      <th>Product</th>
                       <th>Foto</th>
-                      <th>Action</th>
+                      <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -58,10 +57,8 @@
     },
     columns: [
       {data: 'id', name: 'id'},
-      {data: 'name', name: 'name'},
-      {data: 'photos', name: 'photos'},
-      {data: 'slug', name: 'slug'},
-      
+      {data: 'product.name', name: 'product.name'},
+      {data: 'photos', name: 'photos'}, // relasi pake titik
       {
         data: 'action',
         name: 'action',

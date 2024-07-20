@@ -48,12 +48,12 @@
                             />
                         </div>
                         <div class="form-group">
-                            <label for="photo">Photo</label>
+                            <label for="photos">Foto</label>
                             <input
                                 type="file"
                                 class="form-control-file"
-                                id="photo"
-                                name="photo"
+                                id="photos"
+                                name="photos"
                             />
                         </div>
                         <div class="form-group text-right">

@@ -13,7 +13,7 @@ class Category extends Model
 
     protected $fillable = [ // fillable adalah field yang boleh diisi
         'name',
-        'photo',
+        'photos',
         'slug',
         
     ];
