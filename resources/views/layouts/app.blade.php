@@ -14,20 +14,22 @@
 
     <link rel="icon" href="https://res.cloudinary.com/dyqjckfhh/image/upload/v1721479645/favicon_mjmerf.ico" type="image/x-icon">
 
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     {{-- style --}}
     @stack('prepend-style')
     @include('includes.style')
     @stack('addon-style')
 
     {{-- @push('namespace:app')
-        
+
     @endpush --}}
   </head>
 
   <body>
     <!-- Navigation -->
     @include('includes.navbar')
-    
+
     <!-- Page Content -->
     @yield('content')
 
