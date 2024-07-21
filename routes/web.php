@@ -44,9 +44,9 @@ Route::get('/dashboard/transactions/{id}', [App\Http\Controllers\DashboardTransa
 
 
 Route::get('/dashboard/settings', [App\Http\Controllers\DashboardSettingController::class, 'store'])
-    ->name('dashboard-transaction-store');
+    ->name('dashboard-settings-store');
 Route::get('/dashboard/account', [App\Http\Controllers\DashboardSettingController::class, 'account'])
-    ->name('dashboard-transaction-account');
+    ->name('dashboard-settings-account');
 // ->middleware(['auth', 'admin'])
 Route::prefix('admin')
     ->namespace('App\Http\Controllers\Admin')

@@ -26,19 +26,54 @@
               <a class="nav-link" href="{{ route('categories') }}">Categories</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/">About</a>
+                <a class="nav-link" href="/">About</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/">Sign Up</a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="btn btn-success nav-link px-4 text-white"
-                href="/login.html"
-                >Sign In</a
-              >
-            </li>
+            @guest
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a
+                        class="btn btn-success nav-link px-4 text-white"
+                        href="{{ route('login') }}"
+                        >Sign In</a>
+                </li>
+            @endguest
           </ul>
+
+          @auth
+            <ul class="navbar-nav d-none d-lg-flex">
+                <li class="nav-item dropdown">
+                <a
+                    class="nav-link"
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-toggle="dropdown"
+                >
+                    <img
+                    src="/images/icon-user.png"
+                    alt=""
+                    class="rounded-circle mr-2 profile-picture"
+                    />
+                    Hi, {{ Auth::user()->name }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
+                    <a class="dropdown-item" href="{{ route('dashboard-settings-account') }}">Settings</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" 
+                        href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                        class="dropdown-item">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-inline-block mt-2" href="#">
+                        <img src="/images/icon-cart-empty.svg" alt="" />
+                    </a>
+                </li>
+            </ul>
+            
+          @endauth
         </div>
       </div>
     </nav>
