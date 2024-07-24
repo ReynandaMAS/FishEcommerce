@@ -63,12 +63,30 @@
                     <a class="dropdown-item" href="{{ route('dashboard-settings-account') }}">Settings</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" 
-                        href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                        class="dropdown-item">Logout</a>
+                    href="{{ route('logout') }}"
+                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                    
                 </li>
                 <li class="nav-item">
                     <a class="nav-link d-inline-block mt-2" href="#">
                         <img src="/images/icon-cart-empty.svg" alt="" />
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav d-block d-lg-none">  
+                <li class="nav-item"></li>
+                    <a class="nav-link" href="#">
+                        Hi, {{ Auth::user()->name }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-inline-block" href="#">
+                        Cart
                     </a>
                 </li>
             </ul>
