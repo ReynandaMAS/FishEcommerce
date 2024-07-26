@@ -21,6 +21,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'index'])->name('categories');
 Route::get('/categories/{id}', [App\Http\Controllers\CategoryController::class, 'index'])->name('categories-details');
 Route::get('/details/{id}', [App\Http\Controllers\DetailController::class, 'index'])->name('detail');
+Route::POST('/details/{id}', [App\Http\Controllers\DetailController::class, 'add'])->name('detail-add'); // membuat cart baru (Menambah Cart)
 Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart');
 Route::get('/success', [App\Http\Controllers\CartController::class, 'success'])->name('success');
 

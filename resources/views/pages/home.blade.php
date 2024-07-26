@@ -6,6 +6,7 @@
 
 @section('content')
 <div class="page-content page-home">
+    {{-- banner --}}
       <section class="store-carousel">
         <div class="container">
           <div class="row">
@@ -52,7 +53,9 @@
           </div>
         </div>
       </section>
+    {{-- end banner --}}
 
+    {{-- categories --}}
         <section class="store-trend-categories">
             <div class="container">
                 <div class="row">
@@ -90,48 +93,51 @@
                 </div>
             </div>
         </section>
+    {{-- end categories --}}
 
-      
-      <section class="store-new-products">
-        <div class="container">
-            <div class="row">
-                <div class="col-12" data-aos="fade-up">
-                    <h5>New Products</h5>
+    {{-- new products --}}
+        <section class="store-new-products">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12" data-aos="fade-up">
+                        <h5>New Products</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    @php $incrementProduct = 0 @endphp
+                    @forelse ($products as $product)
+                        <div class="col-6 col-md-4 col-lg-3"
+                            data-aos="fade-up"
+                            data-aos-delay="{{ $incrementProduct+= 100 }}">
+                            <a class="component-products d-block" href="{{ route('detail', $product->slug) }}">
+                                <div class="products-thumbnail">
+                                    <div class="products-image"
+                                        style="
+                                        @if($product->galleries->count()) background-image: url({{ Storage::url($product->galleries->first()->photos) }})
+                                            @else background-color: #eee
+                                        @endif">
+                                    </div>
+                                </div>
+                                <div class="products-text">
+                                    {{ $product->name }}
+                                </div>
+                                <div class="products-price">
+                                    ${{ $product->price }}
+                                </div>
+                            </a>
+                        </div>
+                    @empty
+                        <div class="col-12 text-center py-5"
+                            data-aos="fade-up"
+                            data-aos-delay="100">
+                            No Produtc Found
+                        </div>
+                    @endforelse
                 </div>
             </div>
-            <div class="row">
-                @php $incrementProduct = 0 @endphp
-                @forelse ($products as $product)
-                    <div class="col-6 col-md-4 col-lg-3"
-                        data-aos="fade-up"
-                        data-aos-delay="{{ $incrementProduct+= 100 }}">
-                        <a class="component-products d-block" href="{{ route('detail', $product->slug) }}">
-                            <div class="products-thumbnail">
-                                <div class="products-image"
-                                    style="
-                                    @if($product->galleries->count()) background-image: url({{ Storage::url($product->galleries->first()->photos) }}) 
-                                        @else background-color: #eee 
-                                    @endif">
-                                </div>
-                            </div>
-                            <div class="products-text">
-                                {{ $product->name }}
-                            </div>
-                            <div class="products-price">
-                                ${{ $product->price }}
-                            </div>
-                        </a>
-                    </div>
-                @empty
-                    <div class="col-12 text-center py-5"
-                        data-aos="fade-up"
-                        data-aos-delay="100">
-                        No Produtc Found
-                    </div>
-                @endforelse
-            </div>
-        </div>
-      </section>
+        </section>
+      {{-- end new products --}}
+
     </div>
   </div>
 </div>
