@@ -23,6 +23,7 @@ Route::get('/categories/{id}', [App\Http\Controllers\CategoryController::class, 
 Route::get('/details/{id}', [App\Http\Controllers\DetailController::class, 'index'])->name('detail');
 Route::POST('/details/{id}', [App\Http\Controllers\DetailController::class, 'add'])->name('detail-add'); // membuat cart baru (Menambah Cart)
 Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart');
+Route::DELETE('/cart/{id}', [App\Http\Controllers\CartController::class, 'delete'])->name('cart-delete');
 Route::get('/success', [App\Http\Controllers\CartController::class, 'success'])->name('success');
 
 // Auth

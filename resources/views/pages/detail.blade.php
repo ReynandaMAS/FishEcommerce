@@ -83,7 +83,7 @@
                         <button
                             type="submit"
                             class="btn btn-success nav-link px-4 text-white btn-block mb-3"
-                            href="/cart.html">
+                            href="{{ route('detail-add', $product->id) }}">
                                 Add to Cart
                         </button>
                     </form>

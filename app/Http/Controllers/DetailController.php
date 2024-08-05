@@ -23,7 +23,7 @@ class DetailController extends Controller
         ]);
     }
 
-    public function add(Request $request, $id) 
+    public function add(Request $request, $id)
     {
         $data = [
             'products_id' => $id,

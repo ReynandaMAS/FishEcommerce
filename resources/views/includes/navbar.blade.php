@@ -62,18 +62,27 @@
                     <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
                     <a class="dropdown-item" href="{{ route('dashboard-settings-account') }}">Settings</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" 
-                    href="{{ route('logout') }}"
-                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}</a>
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                      onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                          {{ __('Logout') }}
+                    </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
                     
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-inline-block mt-2" href="#">
-                        <img src="/images/icon-cart-empty.svg" alt="" />
+                    <a class="nav-link d-inline-block mt-2" href="{{ route('cart') }}">
+                        @php
+                            $carts = \App\Models\Cart::where('users_id', Auth::user()->id)->count();
+                        @endphp
+
+                        @if ($carts > 0)
+                          <img src="/images/icon-cart-filled.svg" alt="" />
+                            <div class="cart-badge">{{ $carts }}</div>
+                        @else
+                          <img src="/images/icon-cart-empty.svg" alt="" />
+                        @endif
                     </a>
                 </li>
             </ul>

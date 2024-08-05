@@ -20,11 +20,11 @@ class Cart extends Model
 
     // productnya apa
     public function product() {
-        return $this->hasOne(Product::class,'id','product_id');
+        return $this->hasOne(Product::class,'id','products_id');
     }
 
     // usernya siapa
     public function user() {
-        return $this->bilongsTo(User::class, 'users_id', 'id');
+        return $this->belongsTo(User::class, 'users_id', 'id');
     }
 }
