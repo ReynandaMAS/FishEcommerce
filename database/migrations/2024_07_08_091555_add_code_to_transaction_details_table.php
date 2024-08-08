@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('transactions_details', function (Blueprint $table) {
-            $table->string('shipping_status'); // unpaid, pending, success,
-            $table->string('resi');
+        Schema::table('transaction_details', function (Blueprint $table) {
+            $table->string('code');
         });
     }
 
@@ -22,9 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('transactions_details', function (Blueprint $table) {
-            $table->dropColumn('shipping_status');
-            $table->dropColumn('resi');
+        Schema::table('transaction_details', function (Blueprint $table) {
+            $table->dropColumn('code');
         });
     }
 };
