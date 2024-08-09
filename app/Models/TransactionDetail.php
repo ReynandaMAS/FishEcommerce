@@ -29,4 +29,15 @@ class TransactionDetail extends Model
     protected $hidden = [
         
     ];
+
+    // bisa memanggil relasi product dengan transaction dari transaction details
+    public function product()
+    {
+        return $this->hasOne(Product::class, 'id', 'products_id');
+    }
+
+    public function transaction()
+    {
+        return $this->hasOne(Transaction::class, 'id', 'transactions_id');
+    }
 }

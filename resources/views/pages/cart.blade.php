@@ -160,18 +160,18 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="phone_number">Mobile</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="phone_number"
-                      name="phone_number"
-                      value="+628 2327 101575"
-                    />
+                    <div class="form-group">
+                      <label for="phone_number">Mobile</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="phone_number"
+                        name="phone_number"
+                        value="+628 2327 101575"
+                      />
+                  </div>
                 </div>
               </div>
-            </div>
 
             {{-- Payment --}}
             <div class="row" data-aos="fade-up" data-aos-delay="150">

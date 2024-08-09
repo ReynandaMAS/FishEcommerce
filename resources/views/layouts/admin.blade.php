@@ -15,6 +15,8 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link href="/style/main.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/v/bs4/dt-2.0.8/datatables.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     @stack('addon-style')
 </head>
 
@@ -34,19 +36,19 @@
                     </a>
 
                     <a href="{{ route('product.index') }}"
-                        class="list-group-item list-group-item-action {{ request()->is('admin/product') ? 'active' : '' }}"
+                        class="list-group-item list-group-item-action {{ (request()->is('admin/product')) ? 'active' : '' }}"
                     >
                         Products
                     </a>
 
                     <a href="{{ route('product-gallery.index') }}"
-                        class="list-group-item list-group-item-action {{ request()->is('admin/product-gallery*') ? 'active' : '' }}"
+                        class="list-group-item list-group-item-action {{ (request()->is('admin/product-gallery*')) ? 'active' : '' }}"
                     >
                         Galleries
                     </a>
 
                     <a href="{{ route('category.index') }}"
-                        class="list-group-item list-group-item-action {{ request()->is('admin/category*') ? 'active' : '' }}"
+                        class="list-group-item list-group-item-action {{ (request()->is('admin/category*')) ? 'active' : '' }}"
                     >
                         Categories
                     </a>
@@ -54,7 +56,7 @@
                     <a href="#" class="list-group-item list-group-item-action">Transactions</a>
 
                     <a href="{{ route('user.index') }}"
-                        class="list-group-item list-group-item-action {{ request()->is('admin/user*') ? 'active' : '' }}"
+                        class="list-group-item list-group-item-action {{ (request()->is('admin/user*')) ? 'active' : '' }}"
                     >
                         Users
                     </a>
@@ -84,7 +86,7 @@
                                     data-toggle="dropdown">
                                     <img src="/images/icon-user.png" alt=""
                                         class="rounded-circle mr-4 profile-picture" />
-                                    Hi, Rey
+                                    Hi, <b>Admin</b> {{  Auth::user()->name }}
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/">Logout</a>
@@ -95,7 +97,7 @@
                         <ul class="navbar-nav d-block d-lg-none mt-3">
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
-                                    Hi, Admin Rey
+                                    Hi, Admin {{  Auth::user()->name }}
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -115,6 +117,9 @@
     @stack('prepend-script')
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
+
     <script src="https://cdn.datatables.net/v/bs4/dt-2.0.8/datatables.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>

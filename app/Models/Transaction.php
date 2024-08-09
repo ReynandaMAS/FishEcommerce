@@ -29,4 +29,10 @@ class Transaction extends Model
     protected $hidden = [
         
     ];
+
+    // relasi untuk user pembeli
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'users_id', 'id');
+    }
 }
