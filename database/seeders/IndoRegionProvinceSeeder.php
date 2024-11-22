@@ -27,15 +27,7 @@ class IndoRegionProvinceSeeder extends Seeder
         // Get Data
         $provinces = RawDataGetter::getProvinces();
 
-        // Membuat province yang ada di Luar Indonesia
-        // $provinces[] = [
-        //     'id' => 35, // Sesuaikan ID sesuai urutan yang diperlukan
-        //     'name' => 'Provinsi Baru',
-        // ];
-
         // Insert Data to Database
         DB::table('provinces')->insert($provinces);
     }
-    // php artisan db:seed --class=IndoRegionProvinceSeeder
-
 }

@@ -27,12 +27,6 @@ class IndoRegionRegencySeeder extends Seeder
         // Get Data
         $regencies = RawDataGetter::getRegencies();
 
-        // Membuat regency yang ada di Luar Indonesia
-        // $provinces[] = [
-        //     'id' => 35, // Sesuaikan ID sesuai urutan yang diperlukan
-        //     'name' => 'regency Baru',
-        // ];
-
         // Insert Data to Database
         DB::table('regencies')->insert($regencies);
     }

@@ -42,17 +42,17 @@ Route::get('/dashboard/products', [App\Http\Controllers\DashboardProductControll
     ->name('dashboard-product');
 Route::get('/dashboard/products/create', [App\Http\Controllers\DashboardProductController::class, 'create'])
     ->name('dashboard-product-create');
-Route::POST('/dashboard/products', [App\Http\Controllers\DashboardProductController::class, 'store'])
+Route::post('/dashboard/products', [App\Http\Controllers\DashboardProductController::class, 'store'])
     ->name('dashboard-product-store');
 Route::get('/dashboard/products/{id}', [App\Http\Controllers\DashboardProductController::class, 'details'])
     ->name('dashboard-product-details');
 
-Route::post('/dashboard/products/{id}', [App\Http\Controllers\DashboardProductController::class, 'update'])
-    ->name('dashboard-product-update');
-Route::post('/dashboard/products/gallery/upload', [App\Http\Controllers\DashboardProductController::class, 'uploadGallery'])
-    ->name('dashboard-product-gallery-upload');
-Route::post('/dashboard/products/gallery/delete/{id}', [App\Http\Controllers\DashboardProductController::class, 'deleteGallery'])
-    ->name('dashboard-product-gallery-delete');
+// Route::post('/dashboard/products/{id}', [App\Http\Controllers\DashboardProductController::class, 'update'])
+//     ->name('dashboard-product-update');
+// Route::post('/dashboard/products/gallery/upload', [App\Http\Controllers\DashboardProductController::class, 'uploadGallery'])
+//     ->name('dashboard-products-gallery-upload');
+// Route::get('/dashboard/products/gallery/delete/{id}', [App\Http\Controllers\DashboardProductController::class, 'deleteGallery'])
+//     ->name('dashboard-products-gallery-delete');
 
 Route::get('/dashboard/transactions', [App\Http\Controllers\DashboardTransactionController::class, 'index'])
     ->name('dashboard-transaction');
@@ -65,6 +65,7 @@ Route::get('/dashboard/settings', [App\Http\Controllers\DashboardSettingControll
 Route::get('/dashboard/account', [App\Http\Controllers\DashboardSettingController::class, 'account'])
     ->name('dashboard-settings-account');
 
+
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart');
     Route::DELETE('/cart/{id}', [App\Http\Controllers\CartController::class, 'delete'])->name('cart-delete');
@@ -75,10 +76,21 @@ Route::group(['middleware' => ['auth']], function(){
 
     Route::get('/dashboard/products', [App\Http\Controllers\DashboardProductController::class, 'index'])
         ->name('dashboard-product');
+        
     Route::get('/dashboard/products/create', [App\Http\Controllers\DashboardProductController::class, 'create'])
         ->name('dashboard-product-create');
     Route::get('/dashboard/products/{id}', [App\Http\Controllers\DashboardProductController::class, 'details'])
-        ->name('dashboard-product-details');
+        ->name('dashboard-products-details');
+
+    Route::post('/dashboard/products/{id}', [App\Http\Controllers\DashboardProductController::class, 'update'])
+        ->name('dashboard-product-update');
+
+    Route::post('/dashboard/products/gallery/upload', [App\Http\Controllers\DashboardProductController::class, 'uploadGallery'])
+        ->name('dashboard-products-gallery-upload');
+    Route::get('/dashboard/products/gallery/delete/{id}', [App\Http\Controllers\DashboardProductController::class, 'deleteGallery'])
+        ->name('dashboard-products-gallery-delete');
+
+
 
     Route::get('/dashboard/transactions', [App\Http\Controllers\DashboardTransactionController::class, 'index'])
         ->name('dashboard-transaction');
@@ -90,6 +102,9 @@ Route::group(['middleware' => ['auth']], function(){
         ->name('dashboard-settings-store');
     Route::get('/dashboard/account', [App\Http\Controllers\DashboardSettingController::class, 'account'])
         ->name('dashboard-settings-account');
+        
+    Route::post('/dashboard/account/{redirect}', [App\Http\Controllers\DashboardSettingController::class, 'update'])
+    ->name('dashboard-settings-redirect');
 });
 
 // Admin

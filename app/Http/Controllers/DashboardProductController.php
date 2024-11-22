@@ -23,7 +23,7 @@ class DashboardProductController extends Controller
     }
 
 
-    public function details(Request $request, $id)
+    public function details(Request $request, $id)   
     {
         $product = Product::with((['galleries','category','user']))->findOrFail($id);
         $categories = Category::all();
@@ -37,14 +37,14 @@ class DashboardProductController extends Controller
     
     public function uploadGallery(Request $request)
     {
-         $data = $request->all();
+        $data = $request->all();
 
         // slug dibuat otomatis
-        $data['photos'] = $request->file('photos')->store('storage/assets/product','public');
+        $data['photos'] = $request->file('photos')->store('storage/assets/product', 'public');
 
         ProductGallery::create($data);
 
-        return redirect()->route('dahsboard-product-details', $request->products_id);
+        return redirect()->route('dashboard-products-details', $request->products_id);
     }
 
     public function deleteGallery(Request $request, $id)
@@ -52,7 +52,8 @@ class DashboardProductController extends Controller
         $item = ProductGallery::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('dahsboard-product-details', $item->products_id);
+        return redirect()->route('dashboard-products-details', $item->products_id);
+    
     }
     
     public function update(ProductRequest $request, string $id)
@@ -67,6 +68,7 @@ class DashboardProductController extends Controller
 
         return redirect()->route('dashboard-product');
     }
+
     public function create()
     {
         $categories = Category::all();

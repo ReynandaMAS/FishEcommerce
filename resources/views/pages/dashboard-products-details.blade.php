@@ -27,7 +27,7 @@
                     </ul>
                 </div>
             @endif
-          <form action="{{ route('dashboard-product-update', $product->id) }}"method="POST" enctype="multipart/form-data" >
+          <form action="{{ route('dashboard-product-update', $product->id) }}" method="POST" enctype="multipart/form-data" >
             @csrf
             <input type="hidden" name="users_id" value="{{ Auth::user()->id }}">
             <div class="card">
@@ -68,10 +68,10 @@
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label>description</label>
+                      <label>Description</label>
                       <textarea
-                        name="editor"
-                        id="editor">{!! $product->description !!}</textarea>
+                        name="description"
+                        id = "editor">{!! $product->description !!}</textarea>
                     </div>
                   </div>
                   <div class="col">
@@ -89,78 +89,76 @@
         </div>
       </div>
       <div class="row mt-4">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="gallery-container">
-                    <img
-                      src="/images/product-card-1.png"
-                      alt=""
-                      class="w-100"
-                    />
-                    <a class="delete-gallery" href="#">
-                      <img src="/images/icon-delete.svg" alt="" />
-                    </a>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="gallery-container">
-                    <img
-                      src="/images/product-card-2.png"
-                      alt=""
-                      class="w-100"
-                    />
-                    <a class="delete-gallery" href="#">
-                      <img src="/images/icon-delete.svg" alt="" />
-                    </a>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="gallery-container">
-                    <img
-                      src="/images/product-card-3.png"
-                      alt=""
-                      class="w-100"
-                    />
-                    <a class="delete-gallery" href="#">
-                      <img src="/images/icon-delete.svg" alt="" />
-                    </a>
-                  </div>
-                </div>
-                <div class="col mt-3">
-                  <input
-                    type="file"
-                    id="file"
-                    style="display: none;"
-                    multiple
-                  />
-                  <button
-                    class="btn btn-secondary btn-block"
-                    onclick="thisFileUpload();"
-                  >
-                    Add Photo
-                  </button>
-                </div>
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          @foreach ($product->galleries as $gallery)
+            <div class="col-md-4">
+              <div class="gallery-container">
+                <img
+                  src="{{ Storage::url($gallery->photos ?? '') }}"
+                  alt=""
+                  class="w-100"
+                />
+                <a 
+                  href="{{ route('dashboard-products-gallery-delete', $gallery->id) }}" 
+                  class="delete-gallery">
+                  <img src="/images/icon-delete.svg" alt="" />
+                </a>
               </div>
             </div>
+          @endforeach
+          <div class="col-12">
+            <form action="{{ route('dashboard-products-gallery-upload') }}" method="POST" enctype="multipart/form-data">
+              @csrf
+              <input type="hidden" name="products_id" value="{{ $product->id }}">
+              <input
+                type="file"
+                name="photos"
+                id="file"
+                class="form-control"
+                style="display: none;"
+                onchange="this.form.submit()"
+              />
+              <button
+                type="button"
+                class="btn btn-secondary btn-block mt-3"
+                onclick="thisFileUpload()">
+                Add Photo
+              </button>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+    </div>
+  </div>
+</div>
 @endsection
 
+<!-- bisa masukan #editor di bawah ini yang versi lama -->
+
+
+
+<!-- end -->
+
+<!-- yang bawah ini versi baru -->
 @push('addon-script')
-    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
     <script>
-      function thisFileUpload() {
-        document.getElementById("file").click();
-      }
+        // Initialize CKEditor
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
     </script>
     <script>
-      CKEDITOR.replace("editor");
+      function thisFileUpload() {
+        document.getElementById('file').click();
+      }
     </script>
 @endpush

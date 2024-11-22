@@ -28,7 +28,7 @@
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <a
         class="card card-dashboard-product d-block"
-        href="{{ route('dashboard-product-details', $product->id) }}"
+        href="{{ route('dashboard-products-details', $product->id) }}"
       >
         <div class="card-body">
           <img
