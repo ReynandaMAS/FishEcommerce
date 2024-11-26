@@ -41,7 +41,7 @@ class CheckoutController extends Controller
 
         // save ke table transaction detail
         foreach ($carts as $cart) {
-            $trx = 'TRX-' . mt_rand(000000000,999999999);
+            $trx = 'NSE-' . mt_rand(000000000,999999999);
             
             TransactionDetail::create([
                 'transactions_id' => $transaction->id,
